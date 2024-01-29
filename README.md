@@ -4,20 +4,22 @@
 
 # spring-data-eclipse-store-migration
 
+Migrates your Spring-Data-JPA-project
+to [Spring-Data-Eclipse-Store](https://github.com/xdev-software/spring-data-eclipse-store)
+through a [OpenRewrite](https://docs.openrewrite.org/)-Recipe.
+
 ## Usage
 
-```
-mvn -U org.openrewrite.maven:rewrite-maven-plugin:run \
-  -Drewrite.recipeArtifactCoordinates=software.xdev:spring-data-eclipse-store-migration:1.0.0-SNAPSHOT \
-  -Drewrite.activeRecipes=software.xdev.spring.data.eclipse.store.JpaMigration
-```
+[Usage guide for the latest release](https://github.com/xdev-software/spring-data-eclipse-store-migration/releases/latest#Usage
 
 > [!CAUTION]
 > Since Spring-Data-Eclipse-Store can't handle ```@Query```-Annotations,
 > these annotations are getting removed by the Rewrite-Recipe.
 
 ## Support
-If you need support as soon as possible and you can't wait for any pull request, feel free to use [our support](https://xdev.software/en/services/support).
+
+If you need support as soon as possible, and you can't wait for any pull request, feel free to
+use [our support](https://xdev.software/en/services/support).
 
 ## Contributing
 See the [contributing guide](./CONTRIBUTING.md) for detailed instructions on how to get started with our project.

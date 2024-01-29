@@ -95,14 +95,12 @@ jobs:
           ## [Changelog](https://github.com/xdev-software/${{ env.PRIMARY_MAVEN_MODULE }}/blob/develop/CHANGELOG.md#${{ steps.version.outputs.releasenumber }})
           See [Changelog#v${{ steps.version.outputs.release }}](https://github.com/xdev-software/${{ env.PRIMARY_MAVEN_MODULE }}/blob/develop/CHANGELOG.md#${{ steps.version.outputs.releasenumber }}) for more information.
 
-          ## Installation
-          Add the following lines to your pom:
-          ```XML
-          <dependency>
-             <groupId>software.xdev</groupId>
-             <artifactId>${{ env.PRIMARY_MAVEN_MODULE }}</artifactId>
-             <version>${{ steps.version.outputs.release }}</version>
-          </dependency>
+          ## Usage
+          Execute the following maven command in the maven project that you want to migrate:
+          ```
+          mvn -U org.openrewrite.maven:rewrite-maven-plugin:run \
+          -Drewrite.recipeArtifactCoordinates=software.xdev:${{ env.PRIMARY_MAVEN_MODULE }}:${{ steps.version.outputs.release }} \
+          -Drewrite.activeRecipes=software.xdev.spring.data.eclipse.store.JpaMigration
           ```
 
   publish_central: # Publish the code to central
