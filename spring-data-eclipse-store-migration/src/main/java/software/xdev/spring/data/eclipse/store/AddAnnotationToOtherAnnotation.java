@@ -43,7 +43,8 @@ public class AddAnnotationToOtherAnnotation extends Recipe
 	
 	@Option(displayName = "Class path",
 		description = "Class path that needs to be added for the new annotation. Can be empty.",
-		example = "spring-data-eclipse-store")
+		example = "spring-data-eclipse-store",
+		required = false)
 	String classPath;
 	
 	@Option(displayName = "Simple name of annotation type to add",
@@ -127,5 +128,25 @@ public class AddAnnotationToOtherAnnotation extends Recipe
 				);
 			}
 		};
+	}
+	
+	public String getExistingAnnotationType()
+	{
+		return this.existingAnnotationType;
+	}
+	
+	public String getAnnotationTypeToAdd()
+	{
+		return this.annotationTypeToAdd;
+	}
+	
+	public String getClassPath()
+	{
+		return this.classPath;
+	}
+	
+	public String getAnnotationTypeToAddSimpleName()
+	{
+		return this.annotationTypeToAddSimpleName;
 	}
 }
