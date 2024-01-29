@@ -10,13 +10,7 @@ tags:
   - eclipsestore
 recipeList:
 
-  - software:
-      xdev:
-        spring:
-          data:
-            eclipse:
-              store:
-    .AddAnnotationToOtherAnnotation:
+  - software.xdev.spring.data.eclipse.store.AddAnnotationToOtherAnnotation:
       existingAnnotationType: 'org.springframework.boot.autoconfigure.SpringBootApplication'
       annotationTypeToAdd: 'software.xdev.spring.data.eclipse.store.repository.config.EnableEclipseStoreRepositories'
       classPath: 'spring-data-eclipse-store'

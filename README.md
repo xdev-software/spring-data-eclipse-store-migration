@@ -8,7 +8,7 @@
 
 ```
 mvn -U org.openrewrite.maven:rewrite-maven-plugin:run \
-  -Drewrite.recipeArtifactCoordinates=software.xdev:spring-data-eclipse-store-migration:1.0-SNAPSHOT \
+  -Drewrite.recipeArtifactCoordinates=software.xdev:spring-data-eclipse-store-migration:1.0.0-SNAPSHOT \
   -Drewrite.activeRecipes=software.xdev.spring.data.eclipse.store.JpaMigration
 ```
 
