@@ -27,3 +27,9 @@ recipeList:
       artifactId: spring-data-eclipse-store
       version: 1.0.0
       acceptTransitive: true
+
+  - org.openrewrite.maven.AddPlugin:
+      groupId: org.springframework.boot
+      artifactId: spring-boot-maven-plugin
+      version: 3.2.2
+      configuration: <configuration><jvmArguments>--add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.time=ALL-UNNAMED</jvmArguments></configuration>
