@@ -9,7 +9,7 @@ tags:
   - eclipse-store
   - eclipsestore
 recipeList:
-  ##################### Add annotation ##################
+
   - software:
       xdev:
         spring:
@@ -21,3 +21,9 @@ recipeList:
       annotationTypeToAdd: 'software.xdev.spring.data.eclipse.store.repository.config.EnableEclipseStoreRepositories'
       classPath: 'spring-data-eclipse-store'
       annotationTypeToAddSimpleName: 'EnableEclipseStoreRepositories'
+
+  - org.openrewrite.maven.AddDependency:
+      groupId: software.xdev
+      artifactId: spring-data-eclipse-store
+      version: 1.0.0
+      acceptTransitive: true
