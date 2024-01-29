@@ -4,6 +4,13 @@
 
 # spring-data-eclipse-store-migration
 
+## Usage
+
+```
+mvn -U org.openrewrite.maven:rewrite-maven-plugin:run \
+  -Drewrite.recipeArtifactCoordinates=software.xdev:spring-data-eclipse-store-migration:1.0-SNAPSHOT \
+  -Drewrite.activeRecipes=software.xdev.spring.data.eclipse.store.JpaMigration
+```
 
 ## Installation
 [Installation guide for the latest release](https://github.com/xdev-software/spring-data-eclipse-store-migration/releases/latest#Installation)

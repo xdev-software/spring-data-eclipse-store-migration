@@ -1,0 +1,23 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: software.xdev.spring.data.eclipse.store.JpaMigration
+displayName: JpaMigration
+description: Migrate from Spring Data JPA to latest Spring Data EclipseStore version.
+tags:
+  - spring-data-jpa
+  - spring-data
+  - eclipse-store
+  - eclipsestore
+recipeList:
+  ##################### Add annotation ##################
+  - software:
+      xdev:
+        spring:
+          data:
+            eclipse:
+              store:
+    .AddAnnotationToOtherAnnotation:
+      existingAnnotationType: 'org.springframework.boot.autoconfigure.SpringBootApplication'
+      annotationTypeToAdd: 'software.xdev.spring.data.eclipse.store.repository.config.EnableEclipseStoreRepositories'
+      classPath: 'spring-data-eclipse-store'
+      annotationTypeToAddSimpleName: 'EnableEclipseStoreRepositories'

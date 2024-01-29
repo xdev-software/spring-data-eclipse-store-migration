@@ -16,7 +16,6 @@
 
 	<modules>
 		<module>spring-data-eclipse-store-migration</module>
-		<module>spring-data-eclipse-store-migration-demo</module>
 	</modules>
 
 	<licenses>
