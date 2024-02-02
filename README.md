@@ -10,7 +10,7 @@ through a [OpenRewrite](https://docs.openrewrite.org/)-Recipe.
 
 ## Usage
 
-[Usage guide for the latest release](https://github.com/xdev-software/spring-data-eclipse-store-migration/releases/latest#Usage
+[Usage guide for the latest release](https://github.com/xdev-software/spring-data-eclipse-store-migration/releases/latest#Usage)
 
 > [!CAUTION]
 > Since Spring-Data-Eclipse-Store can't handle ```@Query```-Annotations,
