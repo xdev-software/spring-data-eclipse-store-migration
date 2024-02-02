@@ -27,6 +27,7 @@ import org.openrewrite.java.JavaParser;
 import org.openrewrite.java.JavaTemplate;
 import org.openrewrite.java.tree.J;
 
+
 public class AddAnnotationToOtherAnnotation extends Recipe
 {
 	
@@ -83,8 +84,8 @@ public class AddAnnotationToOtherAnnotation extends Recipe
 	@Override
 	public TreeVisitor<?, ExecutionContext> getVisitor()
 	{
-		final AnnotationMatcher EXISTING_ANNOTATION_MATCHER = new AnnotationMatcher(this.existingAnnotationType);
-		final AnnotationMatcher NEW_ANNOTATION_MATCHER = new AnnotationMatcher(this.annotationTypeToAdd);
+		final AnnotationMatcher existingAnnotationMatcher = new AnnotationMatcher(this.existingAnnotationType);
+		final AnnotationMatcher newAnnotationMatcher = new AnnotationMatcher(this.annotationTypeToAdd);
 		return new JavaIsoVisitor<>()
 		{
 			@Override
@@ -95,17 +96,17 @@ public class AddAnnotationToOtherAnnotation extends Recipe
 				final J.ClassDeclaration cd = super.visitClassDeclaration(classDecl, executionContext);
 				
 				if(
-					cd.getAnnotations() == null ||
-						cd.getLeadingAnnotations()
-							.stream()
-							.filter(annotation -> EXISTING_ANNOTATION_MATCHER.matches(annotation))
-							.findAny()
-							.isEmpty() ||
-						cd.getLeadingAnnotations()
-							.stream()
-							.filter(annotation -> NEW_ANNOTATION_MATCHER.matches(annotation))
-							.findAny()
-							.isPresent()
+					cd.getAnnotations() == null
+						|| cd.getLeadingAnnotations()
+						.stream()
+						.filter(annotation -> existingAnnotationMatcher.matches(annotation))
+						.findAny()
+						.isEmpty()
+						|| cd.getLeadingAnnotations()
+						.stream()
+						.filter(annotation -> newAnnotationMatcher.matches(annotation))
+						.findAny()
+						.isPresent()
 				)
 				{
 					return cd;

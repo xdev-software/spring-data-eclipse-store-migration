@@ -40,5 +40,3 @@ recipeList:
   - org.openrewrite.java.RemoveAnnotation:
       # https://docs.openrewrite.org/reference/method-patterns
       annotationPattern: '@org.springframework.data.jpa.repository.Query *(..)'
-
-  - org.openrewrite.java.RemoveUnusedImports
