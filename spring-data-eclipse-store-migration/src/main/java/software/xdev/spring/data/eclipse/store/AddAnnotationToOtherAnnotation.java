@@ -16,7 +16,9 @@
 package software.xdev.spring.data.eclipse.store;
 
 import java.util.Comparator;
+import java.util.Objects;
 
+import org.jetbrains.annotations.NotNull;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Option;
 import org.openrewrite.Recipe;
@@ -30,7 +32,6 @@ import org.openrewrite.java.tree.J;
 
 public class AddAnnotationToOtherAnnotation extends Recipe
 {
-	
 	@Option(displayName = "Existing annotation type",
 		description = "Annotation type that is already existing. Recipe is looking for this annotation to add the new "
 			+ "annotation.",
@@ -70,43 +71,39 @@ public class AddAnnotationToOtherAnnotation extends Recipe
 	}
 	
 	@Override
-	public String getDisplayName()
+	public @NotNull String getDisplayName()
 	{
 		return "AddAnnotationToOtherAnnotation";
 	}
 	
 	@Override
-	public String getDescription()
+	public @NotNull String getDescription()
 	{
 		return "Add the a new annotation to an existing annotation.";
 	}
 	
 	@Override
-	public TreeVisitor<?, ExecutionContext> getVisitor()
+	public @NotNull TreeVisitor<?, ExecutionContext> getVisitor()
 	{
 		final AnnotationMatcher existingAnnotationMatcher = new AnnotationMatcher(this.existingAnnotationType);
 		final AnnotationMatcher newAnnotationMatcher = new AnnotationMatcher(this.annotationTypeToAdd);
 		return new JavaIsoVisitor<>()
 		{
 			@Override
-			public J.ClassDeclaration visitClassDeclaration(
-				final J.ClassDeclaration classDecl,
-				final ExecutionContext executionContext)
+			public J.@NotNull ClassDeclaration visitClassDeclaration(
+				final J.@NotNull ClassDeclaration classDecl,
+				final @NotNull ExecutionContext executionContext)
 			{
 				final J.ClassDeclaration cd = super.visitClassDeclaration(classDecl, executionContext);
 				
 				if(
-					cd.getAnnotations() == null
-						|| cd.getLeadingAnnotations()
+					cd.getLeadingAnnotations()
 						.stream()
-						.filter(annotation -> existingAnnotationMatcher.matches(annotation))
+						.filter(existingAnnotationMatcher::matches)
 						.findAny()
-						.isEmpty()
-						|| cd.getLeadingAnnotations()
+						.isEmpty() || cd.getLeadingAnnotations()
 						.stream()
-						.filter(annotation -> newAnnotationMatcher.matches(annotation))
-						.findAny()
-						.isPresent()
+						.anyMatch(newAnnotationMatcher::matches)
 				)
 				{
 					return cd;
@@ -149,5 +146,39 @@ public class AddAnnotationToOtherAnnotation extends Recipe
 	public String getAnnotationTypeToAddSimpleName()
 	{
 		return this.annotationTypeToAddSimpleName;
+	}
+	
+	@Override
+	public boolean equals(final Object o)
+	{
+		if(this == o)
+		{
+			return true;
+		}
+		if(o == null || this.getClass() != o.getClass())
+		{
+			return false;
+		}
+		if(!super.equals(o))
+		{
+			return false;
+		}
+		final AddAnnotationToOtherAnnotation that = (AddAnnotationToOtherAnnotation)o;
+		return Objects.equals(this.existingAnnotationType, that.existingAnnotationType) && Objects.equals(
+			this.annotationTypeToAdd,
+			that.annotationTypeToAdd) && Objects.equals(this.classPath, that.classPath) && Objects.equals(
+			this.annotationTypeToAddSimpleName,
+			that.annotationTypeToAddSimpleName);
+	}
+	
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(
+			super.hashCode(),
+			this.existingAnnotationType,
+			this.annotationTypeToAdd,
+			this.classPath,
+			this.annotationTypeToAddSimpleName);
 	}
 }
