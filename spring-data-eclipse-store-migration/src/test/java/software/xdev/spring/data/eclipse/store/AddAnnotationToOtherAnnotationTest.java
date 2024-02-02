@@ -44,7 +44,7 @@ public class AddAnnotationToOtherAnnotationTest implements RewriteTest
 	}
 	
 	@Test
-	void testSimpleSingle()
+	public void testSimpleSingle()
 	{
 		this.rewriteRun
 			(
@@ -79,7 +79,7 @@ public class AddAnnotationToOtherAnnotationTest implements RewriteTest
 	}
 	
 	@Test
-	void testSimpleMultiple()
+	public void testSimpleMultiple()
 	{
 		this.rewriteRun
 			(
@@ -141,7 +141,7 @@ public class AddAnnotationToOtherAnnotationTest implements RewriteTest
 	}
 	
 	@Test
-	void testAlreadyAdded()
+	public void testAlreadyAdded()
 	{
 		this.rewriteRun
 			(
@@ -165,7 +165,7 @@ public class AddAnnotationToOtherAnnotationTest implements RewriteTest
 	}
 	
 	@Test
-	void testSimpleNoAnnotation()
+	public void testSimpleNoAnnotation()
 	{
 		this.rewriteRun
 			(
@@ -184,7 +184,7 @@ public class AddAnnotationToOtherAnnotationTest implements RewriteTest
 	}
 	
 	@Test
-	void testSimpleNoAnnotationAndAnnotation()
+	public void testSimpleNoAnnotationAndAnnotation()
 	{
 		this.rewriteRun
 			(
