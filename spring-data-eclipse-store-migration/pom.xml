@@ -47,7 +47,7 @@
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<org.openrewrite.recipe.version>2.6.0</org.openrewrite.recipe.version>
+		<org.openrewrite.recipe.version>2.6.3</org.openrewrite.recipe.version>
 		<org.springframework.boot.version>3.2.2</org.springframework.boot.version>
 		<software.xdev.spring.data.eclipse.store.version>1.0.0</software.xdev.spring.data.eclipse.store.version>
 		<junit.version>5.10.0</junit.version>
