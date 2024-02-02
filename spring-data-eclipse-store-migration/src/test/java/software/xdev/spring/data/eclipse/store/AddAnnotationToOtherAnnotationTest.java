@@ -26,7 +26,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import software.xdev.spring.data.eclipse.store.repository.config.EnableEclipseStoreRepositories;
 
 
-public class AddAnnotationToOtherAnnotationTest implements RewriteTest
+class AddAnnotationToOtherAnnotationTest implements RewriteTest
 {
 	
 	@Override
@@ -44,7 +44,7 @@ public class AddAnnotationToOtherAnnotationTest implements RewriteTest
 	}
 	
 	@Test
-	public void testSimpleSingle()
+	void testSimpleSingle()
 	{
 		this.rewriteRun
 			(
@@ -79,7 +79,7 @@ public class AddAnnotationToOtherAnnotationTest implements RewriteTest
 	}
 	
 	@Test
-	public void testSimpleMultiple()
+	void testSimpleMultiple()
 	{
 		this.rewriteRun
 			(
@@ -141,7 +141,7 @@ public class AddAnnotationToOtherAnnotationTest implements RewriteTest
 	}
 	
 	@Test
-	public void testAlreadyAdded()
+	void testAlreadyAdded()
 	{
 		this.rewriteRun
 			(
@@ -165,7 +165,7 @@ public class AddAnnotationToOtherAnnotationTest implements RewriteTest
 	}
 	
 	@Test
-	public void testSimpleNoAnnotation()
+	void testSimpleNoAnnotation()
 	{
 		this.rewriteRun
 			(
@@ -184,7 +184,7 @@ public class AddAnnotationToOtherAnnotationTest implements RewriteTest
 	}
 	
 	@Test
-	public void testSimpleNoAnnotationAndAnnotation()
+	void testSimpleNoAnnotationAndAnnotation()
 	{
 		this.rewriteRun
 			(
