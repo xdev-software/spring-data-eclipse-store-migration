@@ -19,7 +19,7 @@ recipeList:
   - org.openrewrite.maven.AddDependency:
       groupId: software.xdev
       artifactId: spring-data-eclipse-store
-      version: 1.0.0
+      version: 1.0.1
       acceptTransitive: true
 
   - org.openrewrite.maven.AddPlugin:
