@@ -16,7 +16,6 @@
 package software.xdev.spring.data.eclipse.store;
 
 import java.util.Comparator;
-import java.util.Objects;
 
 import org.jetbrains.annotations.NotNull;
 import org.openrewrite.ExecutionContext;
@@ -29,7 +28,18 @@ import org.openrewrite.java.JavaParser;
 import org.openrewrite.java.JavaTemplate;
 import org.openrewrite.java.tree.J;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class AddAnnotationToOtherAnnotation extends Recipe
 {
 	@Option(displayName = "Existing annotation type",
@@ -53,22 +63,6 @@ public class AddAnnotationToOtherAnnotation extends Recipe
 		description = "Simple name of annotation type that should be added to the existing annotation type.",
 		example = "Test")
 	String annotationTypeToAddSimpleName;
-	
-	public AddAnnotationToOtherAnnotation(
-		final String existingAnnotationType,
-		final String annotationTypeToAdd,
-		final String classPath,
-		final String annotationTypeToAddSimpleName)
-	{
-		this.existingAnnotationType = existingAnnotationType;
-		this.annotationTypeToAdd = annotationTypeToAdd;
-		this.classPath = classPath;
-		this.annotationTypeToAddSimpleName = annotationTypeToAddSimpleName;
-	}
-	
-	public AddAnnotationToOtherAnnotation()
-	{
-	}
 	
 	@Override
 	public @NotNull String getDisplayName()
@@ -126,59 +120,5 @@ public class AddAnnotationToOtherAnnotation extends Recipe
 				);
 			}
 		};
-	}
-	
-	public String getExistingAnnotationType()
-	{
-		return this.existingAnnotationType;
-	}
-	
-	public String getAnnotationTypeToAdd()
-	{
-		return this.annotationTypeToAdd;
-	}
-	
-	public String getClassPath()
-	{
-		return this.classPath;
-	}
-	
-	public String getAnnotationTypeToAddSimpleName()
-	{
-		return this.annotationTypeToAddSimpleName;
-	}
-	
-	@Override
-	public boolean equals(final Object o)
-	{
-		if(this == o)
-		{
-			return true;
-		}
-		if(o == null || this.getClass() != o.getClass())
-		{
-			return false;
-		}
-		if(!super.equals(o))
-		{
-			return false;
-		}
-		final AddAnnotationToOtherAnnotation that = (AddAnnotationToOtherAnnotation)o;
-		return Objects.equals(this.existingAnnotationType, that.existingAnnotationType) && Objects.equals(
-			this.annotationTypeToAdd,
-			that.annotationTypeToAdd) && Objects.equals(this.classPath, that.classPath) && Objects.equals(
-			this.annotationTypeToAddSimpleName,
-			that.annotationTypeToAddSimpleName);
-	}
-	
-	@Override
-	public int hashCode()
-	{
-		return Objects.hash(
-			super.hashCode(),
-			this.existingAnnotationType,
-			this.annotationTypeToAdd,
-			this.classPath,
-			this.annotationTypeToAddSimpleName);
 	}
 }
