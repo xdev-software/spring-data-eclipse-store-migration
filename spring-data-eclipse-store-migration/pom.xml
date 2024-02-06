@@ -51,6 +51,7 @@
 		<org.openrewrite.recipe.version>2.6.3</org.openrewrite.recipe.version>
 		<org.springframework.boot.version>3.2.2</org.springframework.boot.version>
 		<software.xdev.spring.data.eclipse.store.version>1.0.0</software.xdev.spring.data.eclipse.store.version>
+		<lombok.version>1.18.30</lombok.version>
 	</properties>
 
 	<repositories>
@@ -116,6 +117,13 @@
 			<groupId>org.openrewrite</groupId>
 			<artifactId>rewrite-maven</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -184,9 +192,6 @@
 				<version>3.12.1</version>
 				<configuration>
 					<release>${maven.compiler.release}</release>
-					<compilerArgs>
-						<arg>-proc:none</arg>
-					</compilerArgs>
 				</configuration>
 			</plugin>
 			<plugin>
