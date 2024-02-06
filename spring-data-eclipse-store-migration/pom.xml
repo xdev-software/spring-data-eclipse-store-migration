@@ -50,7 +50,7 @@
 
 		<org.openrewrite.recipe.version>2.6.3</org.openrewrite.recipe.version>
 		<org.springframework.boot.version>3.2.2</org.springframework.boot.version>
-		<software.xdev.spring.data.eclipse.store.version>1.0.0</software.xdev.spring.data.eclipse.store.version>
+		<software.xdev.spring.data.eclipse.store.version>1.0.1</software.xdev.spring.data.eclipse.store.version>
 		<lombok.version>1.18.30</lombok.version>
 	</properties>
 
@@ -115,7 +115,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.openrewrite</groupId>
-			<artifactId>rewrite-maven</artifactId>
+			<artifactId>rewrite-properties</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -136,7 +136,6 @@
 			<version>${software.xdev.spring.data.eclipse.store.version}</version>
 			<scope>runtime</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.openrewrite</groupId>
 			<artifactId>rewrite-java-17</artifactId>
@@ -152,7 +151,6 @@
 			<artifactId>slf4j-simple</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 
 	<build>
