@@ -72,13 +72,13 @@ public class AddPropertyIfClassExists extends Recipe
 	@Override
 	public @NotNull String getDisplayName()
 	{
-		return "AddValueToAnnotationIfDependencyExists";
+		return "AddPropertyIfClassExists";
 	}
 	
 	@Override
 	public @NotNull String getDescription()
 	{
-		return "::::TODO:::Add the a new annotation to an existing annotation.";
+		return "Add a property to the properties file if a specific class exists.";
 	}
 	
 	@Override
