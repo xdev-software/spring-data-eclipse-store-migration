@@ -16,12 +16,11 @@ recipeList:
       classPath: 'spring-data-eclipse-store'
       annotationTypeToAddSimpleName: 'EnableEclipseStoreRepositories'
 
-  - software.xdev.spring.data.eclipse.store.AddPropertyIfClassExists:
+  - software.xdev.spring.data.eclipse.store.AddSpringPropertyIfClassExists:
       className: 'org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration'
       property: 'spring.autoconfigure.exclude'
       value: 'org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration'
       comment: 'This suppresses the use of JPA in the project. It is needed to let EclipseStore coexist with JPA.'
-      delimiter: =
 
   - org.openrewrite.maven.AddDependency:
       groupId: software.xdev

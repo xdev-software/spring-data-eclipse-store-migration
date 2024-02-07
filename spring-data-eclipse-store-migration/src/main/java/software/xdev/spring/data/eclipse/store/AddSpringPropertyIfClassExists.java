@@ -15,13 +15,15 @@
  */
 package software.xdev.spring.data.eclipse.store;
 
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Option;
 import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
 import org.openrewrite.internal.lang.Nullable;
-import org.openrewrite.properties.AddProperty;
+import org.openrewrite.java.spring.AddSpringProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -35,7 +37,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class AddPropertyIfClassExists extends Recipe
+public class AddSpringPropertyIfClassExists extends Recipe
 {
 	@Option(displayName = "Class that must exist in the classpath to add the property",
 		description = "Name of the class that must exist in the classpath to execute the recipe to add a property in the properties file.",
@@ -50,7 +52,8 @@ public class AddPropertyIfClassExists extends Recipe
 	private String property;
 	@Option(
 		displayName = "Property value",
-		description = "The value of the new property key."
+		description = "The value of the new property key.",
+		example = "true"
 	)
 	private String value;
 	@Option(
@@ -61,24 +64,25 @@ public class AddPropertyIfClassExists extends Recipe
 	)
 	private @Nullable String comment;
 	@Option(
-		displayName = "Optional delimiter",
-		description = "Property entries support different delimiters (`=`, `:`, or whitespace). The default value is "
-			+ "`=` unless provided the delimiter of the new property entry.",
+		displayName = "Optional list of file path matcher",
+		description = "Each value in this list represents a glob expression that is used to match which files will be "
+			+ "modified. If this value is not present, this recipe will query the execution context for reasonable "
+			+ "defaults. (\"**/application.yml\", \"**/application.yml\", and \"**/application.properties\".",
 		required = false,
-		example = ":"
+		example = "[\"**/application.yml\"]"
 	)
-	private @Nullable String delimiter;
+	private @Nullable List<String> pathExpressions;
 	
 	@Override
 	public @NotNull String getDisplayName()
 	{
-		return "AddPropertyIfClassExists";
+		return "AddSpringPropertyIfClassExists";
 	}
 	
 	@Override
 	public @NotNull String getDescription()
 	{
-		return "Add a property to the properties file if a specific class exists.";
+		return "Add a spring property to the properties file if a specific class exists.";
 	}
 	
 	@Override
@@ -88,8 +92,8 @@ public class AddPropertyIfClassExists extends Recipe
 		{
 			return TreeVisitor.noop();
 		}
-		return new AddProperty(
-			this.property, this.value, this.comment, this.delimiter
+		return new AddSpringProperty(
+			this.property, this.value, this.comment, this.pathExpressions
 		).getVisitor();
 	}
 	

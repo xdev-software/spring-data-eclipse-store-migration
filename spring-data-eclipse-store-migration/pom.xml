@@ -114,8 +114,8 @@
 			<artifactId>rewrite-java</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.openrewrite</groupId>
-			<artifactId>rewrite-properties</artifactId>
+			<groupId>org.openrewrite.recipe</groupId>
+			<artifactId>rewrite-spring</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
