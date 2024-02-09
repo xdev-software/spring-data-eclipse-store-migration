@@ -77,6 +77,45 @@ class AddSpringPropertyIfClassExistsTest implements RewriteTest
 	}
 	
 	@Test
+	void testMultipleYamlAlsoInTestFolder()
+	{
+		this.rewriteRun
+			(
+				yaml(
+					"",
+					"""
+						spring:
+						  autoconfigure:
+						    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+						""",
+					s -> s.path("/src/main/resources/application.yml")
+				),
+				yaml(
+					"",
+					"""
+						spring:
+						  autoconfigure:
+						    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+						""",
+					s -> s.path("/src/test/resources/application.yml")
+				),
+				yaml(
+					"",
+					"""
+						spring:
+						  autoconfigure:
+						    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+						""",
+					s -> s.path("application.yml")
+				),
+				yaml(
+					"",
+					s -> s.path("no-application.yml")
+				)
+			);
+	}
+	
+	@Test
 	void testWrongFileNameYaml()
 	{
 		this.rewriteRun
