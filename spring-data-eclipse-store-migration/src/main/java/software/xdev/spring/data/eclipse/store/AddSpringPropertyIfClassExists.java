@@ -40,7 +40,8 @@ import lombok.Setter;
 public class AddSpringPropertyIfClassExists extends Recipe
 {
 	@Option(displayName = "Class that must exist in the classpath to add the property",
-		description = "Name of the class that must exist in the classpath to execute the recipe to add a property in the properties file.",
+		description = "Name of the class that must exist in the classpath to execute the "
+			+ "recipe to add a property in the properties file.",
 		example = "software.xdev")
 	private String className;
 	
