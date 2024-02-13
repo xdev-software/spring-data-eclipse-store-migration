@@ -16,10 +16,16 @@ recipeList:
       classPath: 'spring-data-eclipse-store'
       annotationTypeToAddSimpleName: 'EnableEclipseStoreRepositories'
 
+  - software.xdev.spring.data.eclipse.store.AddSpringPropertyIfClassExists:
+      className: 'org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration'
+      property: 'spring.autoconfigure.exclude'
+      value: 'org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration'
+      comment: 'This suppresses the use of JPA in the project. It is needed to let EclipseStore coexist with JPA.'
+
   - org.openrewrite.maven.AddDependency:
       groupId: software.xdev
       artifactId: spring-data-eclipse-store
-      version: 1.0.0
+      version: 1.0.2
       acceptTransitive: true
 
   - org.openrewrite.maven.AddPlugin:
@@ -33,10 +39,37 @@ recipeList:
       artifactId: spring-boot-maven-plugin
       configuration: <jvmArguments>--add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.time=ALL-UNNAMED</jvmArguments>
 
-  - org.openrewrite.maven.RemoveDependency:
-      groupId: org.springframework.boot
-      artifactId: spring-boot-starter-data-jpa
-
   - org.openrewrite.java.RemoveAnnotation:
       # https://docs.openrewrite.org/reference/method-patterns
       annotationPattern: '@org.springframework.data.jpa.repository.Query *(..)'
+
+  - org.openrewrite.java.RemoveAnnotation:
+      annotationPattern: '@org.springframework.data.jpa.repository.config.EnableJpaRepositories *(..)'
+
+  # Change all the spring framework repositories to specifically use EclipseStore repositories.
+
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: org.springframework.data.repository.Repository
+      newFullyQualifiedTypeName: software.xdev.spring.data.eclipse.store.repository.interfaces.EclipseStoreCustomRepository
+
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: org.springframework.data.repository.CrudRepository
+      newFullyQualifiedTypeName: software.xdev.spring.data.eclipse.store.repository.interfaces.EclipseStoreCrudRepository
+
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: org.springframework.data.repository.ListCrudRepository
+      newFullyQualifiedTypeName: software.xdev.spring.data.eclipse.store.repository.interfaces.EclipseStoreListCrudRepository
+
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: org.springframework.data.repository.PagingAndSortingRepositoryRepository
+      newFullyQualifiedTypeName: software.xdev.spring.data.eclipse.store.repository.interfaces.EclipseStorePagingAndSortingRepositoryRepository
+
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: org.springframework.data.repository.ListPagingAndSortingRepositoryRepository
+      newFullyQualifiedTypeName: software.xdev.spring.data.eclipse.store.repository.interfaces.EclipseStoreListPagingAndSortingRepositoryRepository
+
+  # Change all the JPA repositories to specifically use EclipseStore repositories.
+
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: org.springframework.data.jpa.repository.JpaRepository
+      newFullyQualifiedTypeName: software.xdev.spring.data.eclipse.store.repository.interfaces.EclipseStoreRepository

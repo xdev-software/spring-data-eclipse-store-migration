@@ -98,7 +98,7 @@ jobs:
           ## Usage
           Execute the following maven command in the maven project that you want to migrate:
           ```
-          mvn -U org.openrewrite.maven:rewrite-maven-plugin:run \
+          mvn org.openrewrite.maven:rewrite-maven-plugin:run \
           -Drewrite.recipeArtifactCoordinates=software.xdev:${{ env.PRIMARY_MAVEN_MODULE }}:${{ steps.version.outputs.release }} \
           -Drewrite.activeRecipes=software.xdev.spring.data.eclipse.store.JpaMigration
           ```

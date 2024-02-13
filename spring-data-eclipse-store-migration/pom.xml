@@ -47,12 +47,11 @@
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<org.openrewrite.recipe.version>2.6.3</org.openrewrite.recipe.version>
+
+		<org.openrewrite.recipe.version>2.6.4</org.openrewrite.recipe.version>
 		<org.springframework.boot.version>3.2.2</org.springframework.boot.version>
-		<software.xdev.spring.data.eclipse.store.version>1.0.0</software.xdev.spring.data.eclipse.store.version>
-		<junit.version>5.10.0</junit.version>
-		<assertj.version>3.24.2</assertj.version>
-		<slf4j.version>2.0.5</slf4j.version>
+		<software.xdev.spring.data.eclipse.store.version>1.0.2</software.xdev.spring.data.eclipse.store.version>
+		<lombok.version>1.18.30</lombok.version>
 	</properties>
 
 	<repositories>
@@ -115,9 +114,16 @@
 			<artifactId>rewrite-java</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.openrewrite</groupId>
-			<artifactId>rewrite-maven</artifactId>
+			<groupId>org.openrewrite.recipe</groupId>
+			<artifactId>rewrite-spring</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -130,7 +136,6 @@
 			<version>${software.xdev.spring.data.eclipse.store.version}</version>
 			<scope>runtime</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.openrewrite</groupId>
 			<artifactId>rewrite-java-17</artifactId>
@@ -144,10 +149,8 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
-			<version>2.0.11</version>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 
 	<build>
@@ -187,9 +190,6 @@
 				<version>3.12.1</version>
 				<configuration>
 					<release>${maven.compiler.release}</release>
-					<compilerArgs>
-						<arg>-proc:none</arg>
-					</compilerArgs>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -223,6 +223,11 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.2.5</version>
 			</plugin>
 		</plugins>
 	</build>
