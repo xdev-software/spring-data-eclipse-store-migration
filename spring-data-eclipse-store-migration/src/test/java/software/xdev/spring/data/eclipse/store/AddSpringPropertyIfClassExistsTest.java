@@ -26,6 +26,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerA
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 
 
+@SuppressWarnings("checkstyle:LineLength")
 class AddSpringPropertyIfClassExistsTest implements RewriteTest
 {
 	
@@ -47,103 +48,97 @@ class AddSpringPropertyIfClassExistsTest implements RewriteTest
 	@Test
 	void testSimpleProperties()
 	{
-		this.rewriteRun
-			(
-				properties(
-					"",
-					"""
-						spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
-						""",
-					s -> s.path("application.properties")
-				)
-			);
+		this.rewriteRun(
+			properties(
+				"",
+				"""
+					spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+					""",
+				s -> s.path("application.properties")
+			)
+		);
 	}
 	
 	@Test
 	void testSimpleYaml()
 	{
-		this.rewriteRun
-			(
-				yaml(
-					"",
-					"""
-						spring:
-						  autoconfigure:
-						    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
-						""",
-					s -> s.path("application.yml")
-				)
-			);
+		this.rewriteRun(
+			yaml(
+				"",
+				"""
+					spring:
+					  autoconfigure:
+					    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+					""",
+				s -> s.path("application.yml")
+			)
+		);
 	}
 	
 	@Test
 	void testMultipleYamlAlsoInTestFolder()
 	{
-		this.rewriteRun
-			(
-				yaml(
-					"",
-					"""
-						spring:
-						  autoconfigure:
-						    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
-						""",
-					s -> s.path("/src/main/resources/application.yml")
-				),
-				yaml(
-					"",
-					"""
-						spring:
-						  autoconfigure:
-						    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
-						""",
-					s -> s.path("/src/test/resources/application.yml")
-				),
-				yaml(
-					"",
-					"""
-						spring:
-						  autoconfigure:
-						    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
-						""",
-					s -> s.path("application.yml")
-				),
-				yaml(
-					"",
-					s -> s.path("no-application.yml")
-				)
-			);
+		this.rewriteRun(
+			yaml(
+				"",
+				"""
+					spring:
+					  autoconfigure:
+					    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+					""",
+				s -> s.path("/src/main/resources/application.yml")
+			),
+			yaml(
+				"",
+				"""
+					spring:
+					  autoconfigure:
+					    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+					""",
+				s -> s.path("/src/test/resources/application.yml")
+			),
+			yaml(
+				"",
+				"""
+					spring:
+					  autoconfigure:
+					    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+					""",
+				s -> s.path("application.yml")
+			),
+			yaml(
+				"",
+				s -> s.path("no-application.yml")
+			)
+		);
 	}
 	
 	@Test
 	void testWrongFileNameYaml()
 	{
-		this.rewriteRun
-			(
-				yaml(
-					"",
-					s -> s.path("random.yml")
-				)
-			);
+		this.rewriteRun(
+			yaml(
+				"",
+				s -> s.path("random.yml")
+			)
+		);
 	}
 	
 	@Test
 	void testWrongFileNameProperties()
 	{
-		this.rewriteRun
-			(
-				properties(
-					"",
-					s -> s.path("random.properties")
-				)
-			);
+		this.rewriteRun(
+			properties(
+				"",
+				s -> s.path("random.properties")
+			)
+		);
 	}
 	
 	/**
 	 * It's not clear if this is a desired behavior, but since the Open Rewrite Recipe
 	 * {@link org.openrewrite.java.spring.AddSpringProperty} is doing this, and we are only using this recipe, this is
-	 * how it
-	 * works now.
+	 * how it works now.
 	 * <p>
 	 * Might change in the future.
 	 * </p>
@@ -151,56 +146,53 @@ class AddSpringPropertyIfClassExistsTest implements RewriteTest
 	@Test
 	void testMultipleProperties()
 	{
-		this.rewriteRun
-			(
-				properties(
-					"",
-					"""
-						spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
-						""",
-					s -> s.path("application.properties")
-				),
-				yaml(
-					"",
-					"""
-						spring:
-						  autoconfigure:
-						    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
-						""",
-					s -> s.path("application.yml")
-				)
-			);
+		this.rewriteRun(
+			properties(
+				"",
+				"""
+					spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+					""",
+				s -> s.path("application.properties")
+			),
+			yaml(
+				"",
+				"""
+					spring:
+					  autoconfigure:
+					    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+					""",
+				s -> s.path("application.yml")
+			)
+		);
 	}
 	
 	@Test
 	void testExisting()
 	{
-		this.rewriteRun
-			(
-				properties(
+		this.rewriteRun(
+			properties(
+				"""
+					spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
 					"""
-						spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
-						"""
-				)
-			);
+			)
+		);
 	}
 	
 	@Test
 	void testClassNotExisting()
 	{
-		this.rewriteRun
-			(
-				recipeSpec ->
-					recipeSpec.recipe(new AddSpringPropertyIfClassExists(
-						"not.existing.Class",
-						"spring.autoconfigure.exclude",
-						"DummyValue",
-						"",
-						null)),
-				properties(
+		this.rewriteRun(
+			recipeSpec ->
+				recipeSpec.recipe(new AddSpringPropertyIfClassExists(
+					"not.existing.Class",
+					"spring.autoconfigure.exclude",
+					"DummyValue",
 					"",
-					s -> s.path("application.properties")
-				)
-			);
+					null)),
+			properties(
+				"",
+				s -> s.path("application.properties")
+			)
+		);
 	}
 }

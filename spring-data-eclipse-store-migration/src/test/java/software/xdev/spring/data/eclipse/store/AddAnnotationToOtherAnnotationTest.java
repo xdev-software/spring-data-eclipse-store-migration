@@ -46,186 +46,174 @@ class AddAnnotationToOtherAnnotationTest implements RewriteTest
 	@Test
 	void testSimpleSingle()
 	{
-		this.rewriteRun
-			(
-				java
-					(
-						"""
-							import org.springframework.boot.autoconfigure.SpringBootApplication;
-							
-							@SpringBootApplication
-							class A
-							{
-							    public A()
-							    {
-							    }
-							}
-							""",
-						"""
-							import org.springframework.boot.autoconfigure.SpringBootApplication;
-							import software.xdev.spring.data.eclipse.store.repository.config.EnableEclipseStoreRepositories;
-							
-							@EnableEclipseStoreRepositories
-							@SpringBootApplication
-							class A
-							{
-							    public A()
-							    {
-							    }
-							}
-							"""
-					)
-			);
+		this.rewriteRun(
+			java(
+				"""
+					import org.springframework.boot.autoconfigure.SpringBootApplication;
+					
+					@SpringBootApplication
+					class A
+					{
+					    public A()
+					    {
+					    }
+					}
+					""",
+				"""
+					import org.springframework.boot.autoconfigure.SpringBootApplication;
+					import software.xdev.spring.data.eclipse.store.repository.config.EnableEclipseStoreRepositories;
+					
+					@EnableEclipseStoreRepositories
+					@SpringBootApplication
+					class A
+					{
+					    public A()
+					    {
+					    }
+					}
+					"""
+			)
+		);
 	}
 	
 	@Test
 	void testSimpleMultiple()
 	{
-		this.rewriteRun
-			(
-				java
-					(
-						"""
-							import org.springframework.boot.autoconfigure.SpringBootApplication;
-							
-							@SpringBootApplication
-							class A
-							{
-							    public A()
-							    {
-							    }
-							}
-							""",
-						"""
-							import org.springframework.boot.autoconfigure.SpringBootApplication;
-							import software.xdev.spring.data.eclipse.store.repository.config.EnableEclipseStoreRepositories;
-							
-							@EnableEclipseStoreRepositories
-							@SpringBootApplication
-							class A
-							{
-							    public A()
-							    {
-							    }
-							}
-							"""
-					),
-				java
-					(
-						"""
-							import org.springframework.boot.autoconfigure.SpringBootApplication;
-							
-							@SpringBootApplication
-							class B
-							{
-							    public B()
-							    {
-							    }
-							}
-							""",
-						"""
-							import org.springframework.boot.autoconfigure.SpringBootApplication;
-							import software.xdev.spring.data.eclipse.store.repository.config.EnableEclipseStoreRepositories;
-							
-							@EnableEclipseStoreRepositories
-							@SpringBootApplication
-							class B
-							{
-							    public B()
-							    {
-							    }
-							}
-							"""
-					)
-			);
+		this.rewriteRun(
+			java(
+				"""
+					import org.springframework.boot.autoconfigure.SpringBootApplication;
+					
+					@SpringBootApplication
+					class A
+					{
+					    public A()
+					    {
+					    }
+					}
+					""",
+				"""
+					import org.springframework.boot.autoconfigure.SpringBootApplication;
+					import software.xdev.spring.data.eclipse.store.repository.config.EnableEclipseStoreRepositories;
+					
+					@EnableEclipseStoreRepositories
+					@SpringBootApplication
+					class A
+					{
+					    public A()
+					    {
+					    }
+					}
+					"""
+			),
+			java(
+				"""
+					import org.springframework.boot.autoconfigure.SpringBootApplication;
+					
+					@SpringBootApplication
+					class B
+					{
+					    public B()
+					    {
+					    }
+					}
+					""",
+				"""
+					import org.springframework.boot.autoconfigure.SpringBootApplication;
+					import software.xdev.spring.data.eclipse.store.repository.config.EnableEclipseStoreRepositories;
+					
+					@EnableEclipseStoreRepositories
+					@SpringBootApplication
+					class B
+					{
+					    public B()
+					    {
+					    }
+					}
+					"""
+			)
+		);
 	}
 	
 	@Test
 	void testAlreadyAdded()
 	{
-		this.rewriteRun
-			(
-				java
-					(
-						"""
-							import org.springframework.boot.autoconfigure.SpringBootApplication;
-							import software.xdev.spring.data.eclipse.store.repository.config.EnableEclipseStoreRepositories;
-							
-							@EnableEclipseStoreRepositories
-							@SpringBootApplication
-							class A
-							{
-							    public A()
-							    {
-							    }
-							}
-							"""
-					)
-			);
+		this.rewriteRun(
+			java(
+				"""
+					import org.springframework.boot.autoconfigure.SpringBootApplication;
+					import software.xdev.spring.data.eclipse.store.repository.config.EnableEclipseStoreRepositories;
+					
+					@EnableEclipseStoreRepositories
+					@SpringBootApplication
+					class A
+					{
+					    public A()
+					    {
+					    }
+					}
+					"""
+			)
+		);
 	}
 	
 	@Test
 	void testSimpleNoAnnotation()
 	{
-		this.rewriteRun
-			(
-				java
-					(
-						"""
-							class A
-							{
-							    public A()
-							    {
-							    }
-							}
-							"""
-					)
-			);
+		this.rewriteRun(
+			java(
+				"""
+					class A
+					{
+					    public A()
+					    {
+					    }
+					}
+					"""
+			)
+		);
 	}
 	
 	@Test
 	void testSimpleNoAnnotationAndAnnotation()
 	{
-		this.rewriteRun
-			(
-				java
-					(
-						"""
-							class B
-							{
-							    public B()
-							    {
-							    }
-							}
-							"""
-					),
-				java
-					(
-						"""
-							import org.springframework.boot.autoconfigure.SpringBootApplication;
-							
-							@SpringBootApplication
-							class A
-							{
-							    public A()
-							    {
-							    }
-							}
-							""",
-						"""
-							import org.springframework.boot.autoconfigure.SpringBootApplication;
-							import software.xdev.spring.data.eclipse.store.repository.config.EnableEclipseStoreRepositories;
-							
-							@EnableEclipseStoreRepositories
-							@SpringBootApplication
-							class A
-							{
-							    public A()
-							    {
-							    }
-							}
-							"""
-					)
-			);
+		this.rewriteRun(
+			java(
+				"""
+					class B
+					{
+					    public B()
+					    {
+					    }
+					}
+					"""
+			),
+			java(
+				"""
+					import org.springframework.boot.autoconfigure.SpringBootApplication;
+					
+					@SpringBootApplication
+					class A
+					{
+					    public A()
+					    {
+					    }
+					}
+					""",
+				"""
+					import org.springframework.boot.autoconfigure.SpringBootApplication;
+					import software.xdev.spring.data.eclipse.store.repository.config.EnableEclipseStoreRepositories;
+					
+					@EnableEclipseStoreRepositories
+					@SpringBootApplication
+					class A
+					{
+					    public A()
+					    {
+					    }
+					}
+					"""
+			)
+		);
 	}
 }
