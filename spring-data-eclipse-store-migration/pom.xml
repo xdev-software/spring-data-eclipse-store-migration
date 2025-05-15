@@ -50,7 +50,7 @@
 
 		<org.openrewrite.recipe.version>2.9.0</org.openrewrite.recipe.version>
 		<org.springframework.boot.version>3.2.2</org.springframework.boot.version>
-		<software.xdev.spring.data.eclipse.store.version>1.0.2</software.xdev.spring.data.eclipse.store.version>
+		<software.xdev.spring.data.eclipse.store.version>2.5.1</software.xdev.spring.data.eclipse.store.version>
 		<lombok.version>1.18.32</lombok.version>
 	</properties>
 
