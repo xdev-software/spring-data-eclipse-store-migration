@@ -7,13 +7,15 @@ on:
     paths-ignore: 
       - '**.md'
       - '.config/**'
+      - '.github/**'
       - '.idea/**'
       - 'assets/**'
   pull_request:
-    types: [opened, synchronize, reopened]
+    branches: [ develop ]
     paths-ignore: 
       - '**.md'
       - '.config/**'
+      - '.github/**'
       - '.idea/**'
       - 'assets/**'
 
@@ -22,11 +24,24 @@ env:
   SONARCLOUD_HOST: https://sonarcloud.io
 
 jobs:
-  sonar:
-    name: SonarCloud Scan
+  token-check:
     runs-on: ubuntu-latest
-    # Dependabot PRs have no access to secrets (SONAR_TOKEN) -> Ignore them
-    if: ${{ github.event_name != 'pull_request' || !startsWith(github.head_ref, 'dependabot/') }}
+    if: ${{ !(github.event_name == 'pull_request' && startsWith(github.head_ref, 'renovate/')) }}
+    timeout-minutes: 5
+    outputs:
+      hasToken: ${{ steps.check-token.outputs.has }}
+    steps:
+      - id: check-token
+        run: |
+          [ -z $SONAR_TOKEN ] && echo "has=false" || echo "has=true" >> "$GITHUB_OUTPUT"
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  sonar-scan:
+    runs-on: ubuntu-latest
+    needs: token-check
+    if: ${{ needs.token-check.outputs.hasToken }}
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
@@ -54,7 +69,7 @@ jobs:
 
       - name: Build with Maven
         run: |
-          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+          ./mvnw -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
             -DskipTests \
             -Dsonar.projectKey=${{ env.SONARCLOUD_ORG }}_${{ github.event.repository.name }} \
             -Dsonar.organization=${{ env.SONARCLOUD_ORG }} \

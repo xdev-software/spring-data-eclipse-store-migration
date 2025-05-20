@@ -16,7 +16,7 @@
 	<module name="LineLength">
 		<property name="max" value="120"/>
 		<property name="fileExtensions" value="java"/>
-		<!-- Ignore default + links in comments -->
+		<!-- Ignore default + links -->
 		<property name="ignorePattern" value="(^(package|import))|(^\s*(\/\/|\*) .*https?.*$)"/>
 	</module>
 	<module name="NewlineAtEndOfFile"/>
@@ -32,10 +32,6 @@
 	<!-- Generated code -->
 	<module name="SuppressionSingleFilter">
 		<property name="checks" value="."/>
-		<property name="files" value="[\\/](src)?gen[\\/].*\.java$"/>
-	</module>
-	<module name="SuppressionSingleFilter">
-		<property name="checks" value="."/>
 		<property name="files" value="[\\/]src[\\/]gen(erated)?[\\/].*\.java$"/>
 	</module>
 	<!-- Test code -->
@@ -43,11 +39,20 @@
 		<property name="checks" value="MagicNumberCheck"/>
 		<property name="files" value="[\\/]test[\\/].*\.java$"/>
 	</module>
+
+	<!-- Suppressions -->
 	<module name="SuppressWarningsFilter"/>
+	<!-- https://github.com/checkstyle/checkstyle/issues/7287 -->
+	<module name="SuppressWithPlainTextCommentFilter">
+		<property name="offCommentFormat" value="// CHECKSTYLE\:OFF ([\w\|]+)"/>
+		<property name="onCommentFormat" value="// CHECKSTYLE\:ON ([\w\|]+)"/>
+		<property name="checkFormat" value="$1"/>
+	</module>
 
 	<module name="TreeWalker">
 		<!-- Checks - sorted alphabetically -->
 		<module name="ArrayTypeStyle"/>
+		<module name="AvoidDoubleBraceInitialization"/>
 		<module name="AvoidStarImport"/>
 		<module name="ConstantName"/>
 		<module name="DefaultComesLast"/>
@@ -64,6 +69,11 @@
 		<module name="FinalParameters"/>
 		<module name="GenericWhitespace"/>
 		<module name="HideUtilityClassConstructor"/>
+		<module name="IllegalCatch">
+			<!-- https://docs.pmd-code.org/pmd-doc-7.11.0/pmd_rules_java_errorprone.html#avoidcatchingnpe -->
+			<!-- https://docs.pmd-code.org/pmd-doc-7.11.0/pmd_rules_java_errorprone.html#avoidcatchingthrowable -->
+			<property name="illegalClassNames" value="Error,Throwable,NullPointerException,java.lang.Error,java.lang.Throwable,java.lang.NullPointerException"/>
+		</module>
 		<module name="IllegalImport"/>
 		<module name="InterfaceIsType"/>
 		<module name="JavadocStyle">
@@ -89,7 +99,6 @@
 		<module name="MethodParamPad"/>
 		<module name="MissingDeprecated"/>
 		<module name="MissingOverride"/>
-		<module name="MissingSwitchDefault"/>
 		<module name="ModifierOrder"/>
 		<module name="NeedBraces"/>
 		<module name="NoClone"/>
@@ -118,7 +127,13 @@
 		</module>
 		<module name="TypecastParenPad"/>
 		<module name="TypeName"/>
+		<module name="UnnecessaryParentheses"/>
+		<module name="UnnecessarySemicolonAfterOuterTypeDeclaration"/>
+		<module name="UnnecessarySemicolonAfterTypeMemberDeclaration"/>
+		<module name="UnnecessarySemicolonInEnumeration"/>
+		<module name="UnnecessarySemicolonInTryWithResources"/>
 		<module name="UnusedImports"/>
+		<module name="UnusedLocalVariable"/>
 		<module name="UpperEll"/>
 		<module name="VisibilityModifier">
 			<property name="packageAllowed" value="true"/>
@@ -130,12 +145,6 @@
 		<module name="WhitespaceAround">
 			<property name="tokens"
 					  value="ASSIGN,BAND,BAND_ASSIGN,BOR,BOR_ASSIGN,BSR,BSR_ASSIGN,BXOR,BXOR_ASSIGN,COLON,DIV,DIV_ASSIGN,EQUAL,GE,GT,LAND,LCURLY,LE,LOR,LT,MINUS,MINUS_ASSIGN,MOD,MOD_ASSIGN,NOT_EQUAL,PLUS,PLUS_ASSIGN,QUESTION,RCURLY,SL,SLIST,SL_ASSIGN,SR,SR_ASSIGN,STAR,STAR_ASSIGN,TYPE_EXTENSION_AND"/>
-		</module>
-
-		<!-- Filter -->
-		<module name="SuppressionCommentFilter">
-			<property name="offCommentFormat" value="\s*CHECKSTYLE:OFF\s*[^\s]{1,}"/>
-			<property name="onCommentFormat" value="\s*CHECKSTYLE:ON"/>
 		</module>
 	</module>
 </module>
