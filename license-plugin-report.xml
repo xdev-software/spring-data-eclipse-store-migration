@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<licensePluginReport goal="FORMAT" timestamp="1753353893777">
+    <module artifactId="spring-data-eclipse-store-migration" groupId="software.xdev" version="2.5.3"/>
+    <files>
+        <file path="src/main/java/software/xdev/spring/data/eclipse/store/AddAnnotationToOtherAnnotation.java" result="NOOP"/>
+        <file path="src/main/java/software/xdev/spring/data/eclipse/store/AddSpringPropertyIfClassExists.java" result="NOOP"/>
+        <file path="src/test/java/software/xdev/spring/data/eclipse/store/AddAnnotationToOtherAnnotationTest.java" result="NOOP"/>
+        <file path="src/test/java/software/xdev/spring/data/eclipse/store/AddSpringPropertyIfClassExistsTest.java" result="NOOP"/>
+    </files>
+</licensePluginReport>
