@@ -16,6 +16,7 @@
 package software.xdev.spring.data.eclipse.store;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.jetbrains.annotations.NotNull;
 import org.openrewrite.ExecutionContext;
@@ -25,18 +26,7 @@ import org.openrewrite.TreeVisitor;
 import org.openrewrite.internal.lang.Nullable;
 import org.openrewrite.java.spring.AddSpringProperty;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 public class AddSpringPropertyIfClassExists extends Recipe
 {
 	@Option(displayName = "Class that must exist in the classpath to add the property",
@@ -74,6 +64,76 @@ public class AddSpringPropertyIfClassExists extends Recipe
 	)
 	private @Nullable List<String> pathExpressions;
 	
+	public AddSpringPropertyIfClassExists()
+	{
+	}
+	
+	public AddSpringPropertyIfClassExists(
+		final String className,
+		final String property,
+		final String value,
+		final String comment,
+		final List<String> pathExpressions)
+	{
+		this.className = className;
+		this.property = property;
+		this.value = value;
+		this.comment = comment;
+		this.pathExpressions = pathExpressions;
+	}
+	
+	// region Accessors
+	public String getClassName()
+	{
+		return this.className;
+	}
+	
+	public void setClassName(final String className)
+	{
+		this.className = className;
+	}
+	
+	public String getProperty()
+	{
+		return this.property;
+	}
+	
+	public void setProperty(final String property)
+	{
+		this.property = property;
+	}
+	
+	public String getValue()
+	{
+		return this.value;
+	}
+	
+	public void setValue(final String value)
+	{
+		this.value = value;
+	}
+	
+	public String getComment()
+	{
+		return this.comment;
+	}
+	
+	public void setComment(final String comment)
+	{
+		this.comment = comment;
+	}
+	
+	public List<String> getPathExpressions()
+	{
+		return this.pathExpressions;
+	}
+	
+	public void setPathExpressions(final List<String> pathExpressions)
+	{
+		this.pathExpressions = pathExpressions;
+	}
+	// endregion
+	
 	@Override
 	public @NotNull String getDisplayName()
 	{
@@ -109,5 +169,35 @@ public class AddSpringPropertyIfClassExists extends Recipe
 		{
 			return false;
 		}
+	}
+	
+	@Override
+	public boolean equals(final Object o)
+	{
+		if(!(o instanceof final AddSpringPropertyIfClassExists that))
+		{
+			return false;
+		}
+		if(!super.equals(o))
+		{
+			return false;
+		}
+		return Objects.equals(this.getClassName(), that.getClassName()) && Objects.equals(
+			this.getProperty(),
+			that.getProperty()) && Objects.equals(this.getValue(), that.getValue()) && Objects.equals(
+			this.getComment(),
+			that.getComment()) && Objects.equals(this.getPathExpressions(), that.getPathExpressions());
+	}
+	
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(
+			super.hashCode(),
+			this.getClassName(),
+			this.getProperty(),
+			this.getValue(),
+			this.getComment(),
+			this.getPathExpressions());
 	}
 }

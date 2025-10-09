@@ -16,6 +16,7 @@
 package software.xdev.spring.data.eclipse.store;
 
 import java.util.Comparator;
+import java.util.Objects;
 
 import org.jetbrains.annotations.NotNull;
 import org.openrewrite.ExecutionContext;
@@ -28,18 +29,7 @@ import org.openrewrite.java.JavaParser;
 import org.openrewrite.java.JavaTemplate;
 import org.openrewrite.java.tree.J;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 public class AddAnnotationToOtherAnnotation extends Recipe
 {
 	@Option(displayName = "Existing annotation type",
@@ -63,6 +53,64 @@ public class AddAnnotationToOtherAnnotation extends Recipe
 		description = "Simple name of annotation type that should be added to the existing annotation type.",
 		example = "Test")
 	String annotationTypeToAddSimpleName;
+	
+	public AddAnnotationToOtherAnnotation()
+	{
+	}
+	
+	public AddAnnotationToOtherAnnotation(
+		final String existingAnnotationType,
+		final String annotationTypeToAdd,
+		final String classPath,
+		final String annotationTypeToAddSimpleName)
+	{
+		this.existingAnnotationType = existingAnnotationType;
+		this.annotationTypeToAdd = annotationTypeToAdd;
+		this.classPath = classPath;
+		this.annotationTypeToAddSimpleName = annotationTypeToAddSimpleName;
+	}
+	
+	// region Accessors
+	public String getExistingAnnotationType()
+	{
+		return this.existingAnnotationType;
+	}
+	
+	public void setExistingAnnotationType(final String existingAnnotationType)
+	{
+		this.existingAnnotationType = existingAnnotationType;
+	}
+	
+	public String getAnnotationTypeToAdd()
+	{
+		return this.annotationTypeToAdd;
+	}
+	
+	public void setAnnotationTypeToAdd(final String annotationTypeToAdd)
+	{
+		this.annotationTypeToAdd = annotationTypeToAdd;
+	}
+	
+	public String getClassPath()
+	{
+		return this.classPath;
+	}
+	
+	public void setClassPath(final String classPath)
+	{
+		this.classPath = classPath;
+	}
+	
+	public String getAnnotationTypeToAddSimpleName()
+	{
+		return this.annotationTypeToAddSimpleName;
+	}
+	
+	public void setAnnotationTypeToAddSimpleName(final String annotationTypeToAddSimpleName)
+	{
+		this.annotationTypeToAddSimpleName = annotationTypeToAddSimpleName;
+	}
+	// endregion
 	
 	@Override
 	public @NotNull String getDisplayName()
@@ -120,5 +168,34 @@ public class AddAnnotationToOtherAnnotation extends Recipe
 				);
 			}
 		};
+	}
+	
+	@Override
+	public boolean equals(final Object o)
+	{
+		if(!(o instanceof final AddAnnotationToOtherAnnotation that))
+		{
+			return false;
+		}
+		if(!super.equals(o))
+		{
+			return false;
+		}
+		return Objects.equals(this.getExistingAnnotationType(), that.getExistingAnnotationType())
+			&& Objects.equals(this.getAnnotationTypeToAdd(), that.getAnnotationTypeToAdd())
+			&& Objects.equals(this.getClassPath(), that.getClassPath()) && Objects.equals(
+			this.getAnnotationTypeToAddSimpleName(),
+			that.getAnnotationTypeToAddSimpleName());
+	}
+	
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(
+			super.hashCode(),
+			this.getExistingAnnotationType(),
+			this.getAnnotationTypeToAdd(),
+			this.getClassPath(),
+			this.getAnnotationTypeToAddSimpleName());
 	}
 }
