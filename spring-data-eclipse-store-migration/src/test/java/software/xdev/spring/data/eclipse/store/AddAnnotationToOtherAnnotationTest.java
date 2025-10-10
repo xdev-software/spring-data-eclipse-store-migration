@@ -40,7 +40,10 @@ class AddAnnotationToOtherAnnotationTest implements RewriteTest
 				EnableEclipseStoreRepositories.class.getSimpleName()))
 			.parser(JavaParser.fromJavaVersion()
 				.logCompilationWarningsAndErrors(true)
-				.classpath("spring-boot-autoconfigure", "spring-data-eclipse-store"));
+				.classpath(
+					"spring-boot-autoconfigure",
+					"spring-data-commons",
+					"spring-data-eclipse-store"));
 	}
 	
 	@Test
