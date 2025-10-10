@@ -138,14 +138,14 @@ public class AddAnnotationToOtherAnnotation extends Recipe
 			{
 				final J.ClassDeclaration cd = super.visitClassDeclaration(classDecl, executionContext);
 				
-				if(
-					cd.getLeadingAnnotations()
-						.stream()
-						.filter(existingAnnotationMatcher::matches)
-						.findAny()
-						.isEmpty() || cd.getLeadingAnnotations()
-						.stream()
-						.anyMatch(newAnnotationMatcher::matches)
+				if(cd.getLeadingAnnotations()
+					.stream()
+					.filter(existingAnnotationMatcher::matches)
+					.findAny()
+					.isEmpty()
+					|| cd.getLeadingAnnotations()
+					.stream()
+					.anyMatch(newAnnotationMatcher::matches)
 				)
 				{
 					return cd;
