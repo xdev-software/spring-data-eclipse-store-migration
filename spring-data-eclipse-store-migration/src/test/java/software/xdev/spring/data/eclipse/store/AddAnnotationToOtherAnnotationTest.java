@@ -18,7 +18,7 @@ package software.xdev.spring.data.eclipse.store;
 import static org.openrewrite.java.Assertions.java;
 
 import org.junit.jupiter.api.Test;
-import org.openrewrite.java.Java25Parser;
+import org.openrewrite.java.Java17Parser;
 import org.openrewrite.test.RecipeSpec;
 import org.openrewrite.test.RewriteTest;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -38,7 +38,7 @@ class AddAnnotationToOtherAnnotationTest implements RewriteTest
 				EnableEclipseStoreRepositories.class.getName(),
 				"spring-data-eclipse-store",
 				EnableEclipseStoreRepositories.class.getSimpleName()))
-			.parser(Java25Parser.builder()
+			.parser(Java17Parser.builder()
 				.logCompilationWarningsAndErrors(true)
 				.classpath("spring-boot-autoconfigure", "spring-data-eclipse-store"));
 	}
