@@ -16,9 +16,7 @@ through a [OpenRewrite](https://docs.openrewrite.org/)-Recipe.
 > these annotations are getting removed by the Rewrite-Recipe.
 
 ## Support
-
-If you need support as soon as possible, and you can't wait for any pull request, feel free to
-use [our support](https://xdev.software/en/services/support).
+If you need support as soon as possible and you can't wait for any pull request, feel free to use [our support](https://xdev.software/en/services-products/support).
 
 ## Contributing
 See the [contributing guide](./CONTRIBUTING.md) for detailed instructions on how to get started with our project.
