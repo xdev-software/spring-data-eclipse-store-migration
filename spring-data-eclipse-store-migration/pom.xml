@@ -86,7 +86,7 @@
 		<dependency>
 			<groupId>software.xdev</groupId>
 			<artifactId>spring-data-eclipse-store</artifactId>
-			<version>2.5.3</version>
+			<version>3.0.0</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
